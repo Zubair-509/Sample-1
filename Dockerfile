@@ -1,22 +1,20 @@
 FROM node:20-slim
 
-# ── Backend deps ────────────────────────────────────────────────────────────
-WORKDIR /app/backend
-COPY backend/package*.json ./
+WORKDIR /app
+
+# Install backend dependencies at root level
+COPY package.json ./
 RUN npm install
 
-# ── Frontend deps + build ───────────────────────────────────────────────────
-WORKDIR /app/hisaab-frontend
-COPY hisaab-frontend/package*.json ./
-RUN npm install
+# Build frontend
+COPY hisaab-frontend/package*.json ./hisaab-frontend/
+RUN cd hisaab-frontend && npm install
 
-COPY hisaab-frontend/ ./
-RUN npm run build
+COPY hisaab-frontend/ ./hisaab-frontend/
+RUN cd hisaab-frontend && npm run build
 
-# ── Copy backend source ──────────────────────────────────────────────────────
-WORKDIR /app/backend
-COPY backend/ ./
+# Copy backend source
+COPY backend/ ./backend/
 
-# ── Start ───────────────────────────────────────────────────────────────────
 EXPOSE 3000
-CMD ["node", "server.js"]
+CMD ["node", "backend/server.js"]

@@ -1,0 +1,7 @@
+node_modules
+backend/node_modules
+hisaab-frontend/node_modules
+hisaab-frontend/dist
+.git
+.env
+*.local
