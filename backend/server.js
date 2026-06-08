@@ -561,6 +561,65 @@ app.post('/api/budgets', requireAuth, async (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// Data export / import
+// ---------------------------------------------------------------------------
+
+app.get('/api/export', requireAuth, async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      'SELECT * FROM transactions WHERE user_id = $1 ORDER BY date ASC, created_at ASC',
+      [req.userId],
+    );
+    const data = rows.map(normaliseRow);
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Disposition', `attachment; filename="hisaab-export-${new Date().toISOString().slice(0, 10)}.json"`);
+    res.json({ version: 1, exported_at: new Date().toISOString(), transactions: data });
+  } catch (err) {
+    console.error('[Hisaab] GET /api/export error:', err.message);
+    res.status(500).json({ error: 'Export failed' });
+  }
+});
+
+app.post('/api/import', requireAuth, async (req, res) => {
+  const { transactions: incoming } = req.body;
+  if (!Array.isArray(incoming) || incoming.length === 0) {
+    return res.status(400).json({ error: 'No transactions found in file' });
+  }
+  const client = await pool.connect();
+  let imported = 0;
+  let skipped = 0;
+  try {
+    await client.query('BEGIN');
+    for (const t of incoming) {
+      if (!t.id || !t.date || !t.vendor_name || t.total_amount == null) { skipped++; continue; }
+      await client.query(
+        `INSERT INTO transactions
+           (id, user_id, created_at, source, transaction_type, vendor_name, date,
+            category, total_amount, items, tax_amount, notes, attachment)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
+         ON CONFLICT (id) DO NOTHING`,
+        [
+          t.id, req.userId, t.created_at ?? new Date().toISOString(),
+          t.source ?? 'manual', t.transaction_type ?? 'expense',
+          t.vendor_name, t.date, t.category ?? 'Other',
+          t.total_amount, JSON.stringify(t.items ?? []),
+          t.tax_amount ?? null, t.notes ?? null, t.attachment ?? null,
+        ],
+      );
+      imported++;
+    }
+    await client.query('COMMIT');
+    res.json({ imported, skipped });
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error('[Hisaab] POST /api/import error:', err.message);
+    res.status(500).json({ error: 'Import failed' });
+  } finally {
+    client.release();
+  }
+});
+
+// ---------------------------------------------------------------------------
 // Health check & config
 // ---------------------------------------------------------------------------
 

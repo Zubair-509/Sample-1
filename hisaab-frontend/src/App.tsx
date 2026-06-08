@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, User, ArrowLeftRight } from 'lucide-react';
 import { Header } from './components/Header';
 import { NavTabs, type ScreenId } from './components/NavTabs';
 import { FloatingActionButton } from './components/FloatingActionButton';
@@ -8,6 +8,7 @@ import { ManualEntryModal } from './components/ManualEntryModal';
 import { ScanReceiptModal } from './components/ScanReceiptModal';
 import { BudgetModal } from './components/BudgetModal';
 import { RecurringModal } from './components/RecurringModal';
+import { DataTransferModal } from './components/DataTransferModal';
 import { DashboardScreen } from './screens/DashboardScreen';
 import { LedgerScreen } from './screens/LedgerScreen';
 import { TaxSummaryScreen } from './screens/TaxSummaryScreen';
@@ -49,6 +50,7 @@ function HisaabApp() {
   const [scanModalOpen, setScanModalOpen] = useState(false);
   const [budgetModalOpen, setBudgetModalOpen] = useState(false);
   const [recurringModalOpen, setRecurringModalOpen] = useState(false);
+  const [dataTransferOpen, setDataTransferOpen] = useState(false);
 
   // Auto-apply recurring transactions for the current month on load
   useEffect(() => {
@@ -161,6 +163,15 @@ function HisaabApp() {
         onScanReceipt={() => setScanModalOpen(true)}
       >
         <div className="hidden items-center gap-2 border-l border-neutral-200 pl-3 sm:flex">
+          <button
+            type="button"
+            onClick={() => setDataTransferOpen(true)}
+            aria-label="Export / Import data"
+            title="Export / Import data"
+            className="flex h-8 w-8 items-center justify-center rounded-md text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-800"
+          >
+            <ArrowLeftRight size={15} aria-hidden="true" />
+          </button>
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-primary-900">
             <User size={15} aria-hidden="true" />
           </span>
@@ -244,6 +255,12 @@ function HisaabApp() {
         onCreate={createTemplate}
         onUpdate={updateTemplate}
         onDelete={deleteTemplate}
+      />
+
+      <DataTransferModal
+        open={dataTransferOpen}
+        onClose={() => setDataTransferOpen(false)}
+        onImportDone={() => window.location.reload()}
       />
     </div>
   );
