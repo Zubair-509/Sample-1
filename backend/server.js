@@ -5,10 +5,16 @@ import pg from 'pg';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import { existsSync } from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const { Pool } = pg;
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.SESSION_SECRET || 'hisaab-dev-secret-change-in-prod';
 const JWT_EXPIRES_IN = '7d';
 
@@ -100,10 +106,13 @@ async function initDb() {
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });
 
+// In production the backend serves the frontend directly — no CORS needed.
+// In dev, allow localhost and Replit preview domains.
+const isProd = process.env.NODE_ENV === 'production';
 const allowedOrigins = process.env.REPLIT_DOMAINS
   ? process.env.REPLIT_DOMAINS.split(',').map(d => `https://${d.trim()}`)
-  : ['http://localhost:5000'];
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+  : ['http://localhost:5000', 'http://localhost:3001'];
+app.use(cors({ origin: isProd ? false : allowedOrigins, credentials: true }));
 app.use(express.json());
 
 // ---------------------------------------------------------------------------
@@ -557,6 +566,16 @@ app.post('/api/budgets', requireAuth, async (req, res) => {
 
 app.get('/api/health', (_req, res) => res.json({ ok: true }));
 app.get('/api/config', (_req, res) => res.json({ aiEnabled: Boolean(process.env.GEMINI_API_KEY) }));
+
+// ---------------------------------------------------------------------------
+// Serve built frontend in production
+// ---------------------------------------------------------------------------
+
+const distPath = join(__dirname, '../hisaab-frontend/dist');
+if (existsSync(distPath)) {
+  app.use(express.static(distPath));
+  app.get('*', (_req, res) => res.sendFile(join(distPath, 'index.html')));
+}
 
 initDb()
   .then(() => {
