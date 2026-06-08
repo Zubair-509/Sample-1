@@ -7,8 +7,6 @@ startCommand = "node backend/server.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
 
-[[services]]
-name = "hisaab"
-
-[services.variables]
+[variables]
 NODE_ENV = "production"
+NIXPACKS_NODE_VERSION = "20"

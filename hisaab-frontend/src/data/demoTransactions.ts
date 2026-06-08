@@ -26,6 +26,7 @@ export const demoTransactions: Transaction[] = [
     ],
     tax_amount: null,
     notes: 'Paid in cash. Receipt stamp dated 1 May 2026.',
+    attachment: null,
   },
   {
     id: 'demo-002',
@@ -39,6 +40,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Sugar stock — bulk', 8500),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-003',
@@ -52,6 +54,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Monthly electricity bill', 3200),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-004',
@@ -65,6 +68,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Cooking ghee — tins', 12000),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-005',
@@ -78,6 +82,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Counter sales — Week 1', 45000),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-006',
@@ -91,6 +96,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Monthly gas bill', 1800),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-007',
@@ -104,6 +110,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Rice stock — 25kg bags', 9000),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-008',
@@ -117,6 +124,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Shopping bags — bulk pack', 2200),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-009',
@@ -130,6 +138,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Spice mix assortment', 4500),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-010',
@@ -143,6 +152,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Monthly internet bill', 1200),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-011',
@@ -156,6 +166,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Counter sales — Week 2', 52000),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-012',
@@ -169,6 +180,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Monthly shop rent', 25000),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-013',
@@ -182,6 +194,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Monthly staff salary', 18000),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-014',
@@ -195,6 +208,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Bulk grocery order', 15000),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-015',
@@ -208,6 +222,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Local delivery fare', 500),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-016',
@@ -221,6 +236,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Carpenter — shelf repair', 1500),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-017',
@@ -234,6 +250,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Ramadan promotion sales', 8500),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-018',
@@ -247,6 +264,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Counter sales — Week 3', 48000),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-019',
@@ -260,6 +278,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Detergent and cleaning stock', 600),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-020',
@@ -273,6 +292,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Daily staff tea & snacks', 800),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-021',
@@ -286,6 +306,7 @@ export const demoTransactions: Transaction[] = [
     items: single('Distributor commission payout', 3000),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
   {
     id: 'demo-022',
@@ -299,5 +320,6 @@ export const demoTransactions: Transaction[] = [
     items: single('Counter sales — Week 4', 51000),
     tax_amount: null,
     notes: null,
+    attachment: null,
   },
 ];

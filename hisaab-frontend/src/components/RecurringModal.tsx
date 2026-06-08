@@ -47,8 +47,8 @@ interface RecurringModalProps {
   open: boolean;
   onClose: () => void;
   templates: RecurringTemplate[];
-  onCreate: (input: Omit<RecurringTemplate, 'id' | 'is_active' | 'created_at'>) => Promise<void>;
-  onUpdate: (id: string, patch: Partial<RecurringTemplate>) => Promise<void>;
+  onCreate: (input: Omit<RecurringTemplate, 'id' | 'is_active' | 'created_at'>) => Promise<unknown>;
+  onUpdate: (id: string, patch: Partial<RecurringTemplate>) => Promise<unknown>;
   onDelete: (id: string) => Promise<void>;
 }
 

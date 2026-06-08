@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { Paperclip, X, ImageIcon } from 'lucide-react';
+import { Paperclip, X } from 'lucide-react';
 import { Modal } from './Modal';
 import { Button } from './Button';
 import { FormField, inputClassName } from './FormField';

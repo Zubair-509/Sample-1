@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AlertTriangle, ExternalLink } from 'lucide-react';
 import { Modal } from './Modal';
 import { ReceiptUploadArea } from './ReceiptUploadArea';

@@ -1,0 +1,154 @@
+[stage-0  8/10] RUN --mount=type=cache,id=s/90adb985-6421-40c9-9b29-d63ad23a502c-node_modules/cache,target=/app/node_modules/.cache cd hisaab-frontend && npm install && npm run build && cd ../backend && npm install
+
+npm warn config production Use `--omit=dev` instead.
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@eslint/config-array@0.23.5',
+npm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@eslint/config-helpers@0.6.0',
+npm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@eslint/core@1.2.1',
+npm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@eslint/js@10.0.1',
+npm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@eslint/object-schema@3.0.5',
+npm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@eslint/plugin-kit@0.7.2',
+npm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@tailwindcss/oxide@4.3.0',
+npm warn EBADENGINE   required: { node: '>= 20' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@vitejs/plugin-react@6.0.2',
+npm warn EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'eslint@10.4.1',
+npm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'eslint-scope@9.1.2',
+npm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'eslint-visitor-keys@5.0.1',
+npm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'espree@11.2.0',
+npm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'rolldown@1.0.3',
+npm warn EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'vite@8.0.16',
+npm warn EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },
+npm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+
+added 211 packages, and audited 212 packages in 3s
+
+46 packages are looking for funding
+  run `npm fund` for details
+
+
+found 0 vulnerabilities
+
+npm warn config production Use `--omit=dev` instead.
+
+
+> hisaab-frontend@0.0.0 build
+> tsc -b && vite build
+
+
+src/App.tsx(244,9): error TS2322: Type '(input: Omit<RecurringTemplate, "id" | "is_active" | "created_at">) => Promise<RecurringTemplate>' is not assignable to type '(input: Omit<RecurringTemplate, "id" | "created_at" | "is_active">) => Promise<void>'.
+  Type 'Promise<RecurringTemplate>' is not assignable to type 'Promise<void>'.
+    Type 'RecurringTemplate' is not assignable to type 'void'.
+
+src/App.tsx(245,9): error TS2322: Type '(id: string, patch: Partial<Omit<RecurringTemplate, "id" | "created_at">>) => Promise<RecurringTemplate>' is not assignable to type '(id: string, patch: Partial<RecurringTemplate>) => Promise<void>'.
+  Type 'Promise<RecurringTemplate>' is not assignable to type 'Promise<void>'.
+    Type 'RecurringTemplate' is not assignable to type 'void'.
+
+src/components/ManualEntryModal.tsx(2,24): error TS6133: 'ImageIcon' is declared but its value is never read.
+
+src/components/ScanReceiptModal.tsx(1,21): error TS6133: 'useRef' is declared but its value is never read.
+
+src/data/demoTransactions.ts(14,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Inventory"; total_amount: number; items: ({ description: string; quantity: number; unit_price: number; total: number; } | { ...; })[]; tax_amount: null; notes: string; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(30,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Inventory"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(43,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Utilities"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(56,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Inventory"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(69,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "income"; vendor_name: string; date: string; category: "Sales"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(82,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Utilities"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+src/data/demoTransactions.ts(95,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Inventory"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+src/data/demoTransactions.ts(108,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Other"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(121,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Inventory"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(134,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Utilities"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(147,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "income"; vendor_name: string; date: string; category: "Sales"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+src/data/demoTransactions.ts(160,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Services"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(173,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Salary"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+src/data/demoTransactions.ts(186,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "income"; vendor_name: string; date: string; category: "Sales"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(199,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Transport"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(212,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Equipment"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(225,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "income"; vendor_name: string; date: string; category: "Sales"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(238,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "income"; vendor_name: string; date: string; category: "Sales"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(251,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Other"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(264,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "expense"; vendor_name: string; date: string; category: "Food"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+
+src/data/demoTransactions.ts(277,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "income"; vendor_name: string; date: string; category: "Sales"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
+src/data/demoTransactions.ts(290,3): error TS2741: Property 'attachment' is missing in type '{ id: string; created_at: string; source: "manual"; transaction_type: "income"; vendor_name: string; date: string; category: "Sales"; total_amount: number; items: TransactionItem[]; tax_amount: null; notes: null; }' but required in type 'Transaction'.
