@@ -8,12 +8,15 @@ import { EXPENSE_CATEGORIES, type Category, type ExtractedReceipt, type Transact
 
 interface ReceiptReviewCardProps {
   extracted: ExtractedReceipt;
+  attachment?: string | null;
   onConfirm: (values: {
     vendor_name: string;
     date: string;
     category: Category;
     transaction_type: TransactionType;
     total_amount: number;
+    notes: string | null;
+    attachment: string | null;
   }) => void;
   onDiscard: () => void;
 }
@@ -26,16 +29,14 @@ const FIELD_LABELS: Record<string, string> = {
   total_amount: 'Total amount',
 };
 
-// AI Receipt Review Card — Hisaab_Design_Document.md §7.4 / Hisaab_PRD.md FR-01
-// "Trust through transparency": every AI extraction is shown for review and
-// editable before it ever touches the ledger. Unclear fields carry a warning chip.
-export function ReceiptReviewCard({ extracted, onConfirm, onDiscard }: ReceiptReviewCardProps) {
+export function ReceiptReviewCard({ extracted, attachment, onConfirm, onDiscard }: ReceiptReviewCardProps) {
   const unclear = new Set(extracted.unclear_fields ?? []);
   const [vendor, setVendor] = useState(extracted.vendor_name);
   const [date, setDate] = useState(extracted.date ?? today());
   const [category, setCategory] = useState<Category>(extracted.category);
   const [type, setType] = useState<TransactionType>(extracted.transaction_type);
   const [amount, setAmount] = useState(String(extracted.total_amount));
+  const [notes, setNotes] = useState(extracted.notes ?? '');
 
   const categoryOptions: Category[] = type === 'income' ? ['Sales', ...EXPENSE_CATEGORIES] : [...EXPENSE_CATEGORIES];
 
@@ -47,6 +48,8 @@ export function ReceiptReviewCard({ extracted, onConfirm, onDiscard }: ReceiptRe
       category,
       transaction_type: type,
       total_amount: Number.isFinite(numericAmount) && numericAmount > 0 ? Math.round(numericAmount) : extracted.total_amount,
+      notes: notes.trim() || null,
+      attachment: attachment ?? null,
     });
   };
 
@@ -162,11 +165,26 @@ export function ReceiptReviewCard({ extracted, onConfirm, onDiscard }: ReceiptRe
           </div>
         )}
 
-        {extracted.notes && (
-          <p className="border-t border-neutral-100 pt-4 font-body text-sm text-neutral-500">
-            <span className="font-semibold text-neutral-700">Notes: </span>
-            {extracted.notes}
-          </p>
+        {/* Editable notes */}
+        <FormField label="Notes" htmlFor="review-notes">
+          <textarea
+            id="review-notes"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Add any extra details…"
+            rows={2}
+            className={`${inputClassName()} resize-none`}
+          />
+        </FormField>
+
+        {/* Receipt thumbnail */}
+        {attachment && (
+          <div className="overflow-hidden rounded-lg border border-neutral-200">
+            <p className="border-b border-neutral-100 px-3 py-1.5 font-body text-xs font-semibold uppercase tracking-wide text-neutral-500">
+              Receipt Photo
+            </p>
+            <img src={attachment} alt="Scanned receipt" className="h-36 w-full object-contain bg-neutral-50" />
+          </div>
         )}
 
         {unclear.size > 0 && (

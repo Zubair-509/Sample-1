@@ -87,6 +87,11 @@ async function initDb() {
     ALTER TABLE transactions ADD COLUMN IF NOT EXISTS recurring_template_id TEXT REFERENCES recurring_templates(id) ON DELETE SET NULL;
     ALTER TABLE transactions ADD COLUMN IF NOT EXISTS recurring_month TEXT;
   `);
+
+  // Attachment (base64 data URL) stored directly on transaction
+  await pool.query(`
+    ALTER TABLE transactions ADD COLUMN IF NOT EXISTS attachment TEXT;
+  `);
 }
 
 // ---------------------------------------------------------------------------
@@ -218,18 +223,19 @@ app.get('/api/transactions', requireAuth, async (req, res) => {
 });
 
 app.post('/api/transactions', requireAuth, async (req, res) => {
-  const { id, created_at, source, transaction_type, vendor_name, date, category, total_amount, items, tax_amount, notes } = req.body;
+  const { id, created_at, source, transaction_type, vendor_name, date, category, total_amount, items, tax_amount, notes, attachment } = req.body;
   try {
     const { rows } = await pool.query(
-      `INSERT INTO transactions (id, user_id, created_at, source, transaction_type, vendor_name, date, category, total_amount, items, tax_amount, notes)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      `INSERT INTO transactions (id, user_id, created_at, source, transaction_type, vendor_name, date, category, total_amount, items, tax_amount, notes, attachment)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
        ON CONFLICT (id) DO UPDATE SET
          vendor_name = EXCLUDED.vendor_name,
          total_amount = EXCLUDED.total_amount,
          items = EXCLUDED.items,
-         notes = EXCLUDED.notes
+         notes = EXCLUDED.notes,
+         attachment = EXCLUDED.attachment
        RETURNING *`,
-      [id, req.userId, created_at, source, transaction_type, vendor_name, date, category, total_amount, JSON.stringify(items ?? []), tax_amount ?? null, notes ?? null],
+      [id, req.userId, created_at, source, transaction_type, vendor_name, date, category, total_amount, JSON.stringify(items ?? []), tax_amount ?? null, notes ?? null, attachment ?? null],
     );
     res.status(201).json(normaliseRow(rows[0]));
   } catch (err) {
@@ -241,7 +247,7 @@ app.post('/api/transactions', requireAuth, async (req, res) => {
 app.put('/api/transactions/:id', requireAuth, async (req, res) => {
   const { id } = req.params;
   const patch = req.body;
-  const allowed = ['vendor_name', 'date', 'category', 'transaction_type', 'total_amount', 'items', 'tax_amount', 'notes', 'source'];
+  const allowed = ['vendor_name', 'date', 'category', 'transaction_type', 'total_amount', 'items', 'tax_amount', 'notes', 'source', 'attachment'];
   const sets = [];
   const values = [];
   let idx = 1;

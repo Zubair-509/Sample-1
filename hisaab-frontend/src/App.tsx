@@ -94,6 +94,8 @@ function HisaabApp() {
     category: Transaction['category'];
     transaction_type: Transaction['transaction_type'];
     total_amount: number;
+    notes: string | null;
+    attachment: string | null;
   }) => {
     if (editingTransaction) {
       updateTransaction(editingTransaction.id, {
@@ -107,16 +109,14 @@ function HisaabApp() {
         source: 'manual',
         items: [{ description: values.vendor_name, quantity: null, unit_price: null, total: values.total_amount }],
         tax_amount: null,
-        notes: null,
       });
       showToast('Added to your ledger.');
     }
   };
 
   const handleScanConfirm = (
-    values: Omit<Transaction, 'id' | 'created_at' | 'source' | 'tax_amount' | 'notes'> & {
+    values: Omit<Transaction, 'id' | 'created_at' | 'source' | 'tax_amount'> & {
       tax_amount?: number | null;
-      notes?: string | null;
     },
   ) => {
     addTransaction({
@@ -124,6 +124,7 @@ function HisaabApp() {
       source: 'scan',
       tax_amount: values.tax_amount ?? null,
       notes: values.notes ?? null,
+      attachment: values.attachment ?? null,
     });
     setScanModalOpen(false);
     showToast('Added to your ledger.');

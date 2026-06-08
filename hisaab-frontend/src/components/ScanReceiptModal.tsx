@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AlertTriangle, ExternalLink } from 'lucide-react';
 import { Modal } from './Modal';
 import { ReceiptUploadArea } from './ReceiptUploadArea';
@@ -10,11 +10,35 @@ import type { Category, ExtractedReceipt, Transaction, TransactionType } from '.
 interface ScanReceiptModalProps {
   open: boolean;
   onClose: () => void;
-  onConfirm: (values: Omit<Transaction, 'id' | 'created_at' | 'source' | 'tax_amount' | 'notes'> & { tax_amount?: number | null; notes?: string | null }) => void;
+  onConfirm: (values: Omit<Transaction, 'id' | 'created_at' | 'source' | 'tax_amount'> & { tax_amount?: number | null }) => void;
   onFallbackToManual: () => void;
 }
 
 type Stage = 'upload' | 'processing' | 'review' | 'error';
+
+async function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d')!;
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const MAX = 1200;
+      let { width, height } = img;
+      if (width > MAX || height > MAX) {
+        if (width > height) { height = Math.round((height * MAX) / width); width = MAX; }
+        else { width = Math.round((width * MAX) / height); height = MAX; }
+      }
+      canvas.width = width;
+      canvas.height = height;
+      ctx.drawImage(img, 0, 0, width, height);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL('image/jpeg', 0.75));
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
 
 function AiSetupBanner({ onAddManually, onClose }: { onAddManually: () => void; onClose: () => void }) {
   return (
@@ -66,6 +90,7 @@ function AiSetupBanner({ onAddManually, onClose }: { onAddManually: () => void; 
 export function ScanReceiptModal({ open, onClose, onConfirm, onFallbackToManual }: ScanReceiptModalProps) {
   const [stage, setStage] = useState<Stage>('upload');
   const [extracted, setExtracted] = useState<ExtractedReceipt | null>(null);
+  const [attachment, setAttachment] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [aiEnabled, setAiEnabled] = useState<boolean | null>(null);
 
@@ -73,6 +98,7 @@ export function ScanReceiptModal({ open, onClose, onConfirm, onFallbackToManual 
     if (open) {
       setStage('upload');
       setExtracted(null);
+      setAttachment(null);
       setErrorMessage('');
       setAiEnabled(null);
       fetchConfig().then((cfg) => setAiEnabled(cfg.aiEnabled));
@@ -82,6 +108,10 @@ export function ScanReceiptModal({ open, onClose, onConfirm, onFallbackToManual 
   const handleFile = async (file: File) => {
     setStage('processing');
     try {
+      // Convert to base64 for storage alongside the transaction
+      const b64 = await fileToBase64(file).catch(() => null);
+      setAttachment(b64);
+
       const result = await extractReceipt(file);
       setExtracted(result);
       setStage('review');
@@ -101,9 +131,11 @@ export function ScanReceiptModal({ open, onClose, onConfirm, onFallbackToManual 
     category: Category;
     transaction_type: TransactionType;
     total_amount: number;
+    notes: string | null;
+    attachment: string | null;
   }) => {
     if (!extracted) return;
-    onConfirm({ ...values, items: extracted.items });
+    onConfirm({ ...values, items: extracted.items, tax_amount: extracted.tax_amount });
   };
 
   const title = stage === 'review' ? 'Confirm Receipt Details' : 'Scan a Receipt';
@@ -111,7 +143,12 @@ export function ScanReceiptModal({ open, onClose, onConfirm, onFallbackToManual 
   return (
     <Modal open={open} onClose={onClose} title={title} maxWidthClassName="max-w-[640px]">
       {stage === 'review' && extracted ? (
-        <ReceiptReviewCard extracted={extracted} onConfirm={handleConfirm} onDiscard={onClose} />
+        <ReceiptReviewCard
+          extracted={extracted}
+          attachment={attachment}
+          onConfirm={handleConfirm}
+          onDiscard={onClose}
+        />
       ) : aiEnabled === false ? (
         <AiSetupBanner onAddManually={onFallbackToManual} onClose={onClose} />
       ) : (
@@ -132,7 +169,7 @@ export function ScanReceiptModal({ open, onClose, onConfirm, onFallbackToManual 
             </button>
           )}
           <p className="text-center font-body text-xs text-neutral-500">
-            Your receipt is processed instantly and never stored.
+            Your receipt photo is saved with the transaction for your records.
           </p>
         </div>
       )}

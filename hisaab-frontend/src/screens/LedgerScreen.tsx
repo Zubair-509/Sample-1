@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import { Download, Pencil, Search, Trash2, X } from 'lucide-react';
+import { Download, Paperclip, Pencil, Search, Trash2, X } from 'lucide-react';
 import { CategoryChip } from '../components/CategoryChip';
 import { TransactionTypeBadge } from '../components/TransactionTypeBadge';
 import { FilterSelect } from '../components/FilterSelect';
@@ -173,10 +173,17 @@ export function LedgerScreen({ transactions, selectedMonth, onEdit, onDelete, on
                   >
                     <td className="px-4 py-3 font-body text-sm text-neutral-700">{formatShortDate(t.date)}</td>
                     <td className="px-4 py-3">
-                      <p className="font-body text-sm font-medium text-neutral-900">{t.vendor_name}</p>
-                      {t.source === 'scan' && (
+                      <div className="flex items-center gap-1.5">
+                        <p className="font-body text-sm font-medium text-neutral-900">{t.vendor_name}</p>
+                        {t.attachment && (
+                          <Paperclip size={12} className="shrink-0 text-neutral-400" aria-label="Has receipt photo" />
+                        )}
+                      </div>
+                      {t.notes ? (
+                        <p className="mt-0.5 max-w-[260px] truncate font-body text-xs text-neutral-500">{t.notes}</p>
+                      ) : t.source === 'scan' ? (
                         <span className="font-body text-xs text-neutral-500">Scanned receipt</span>
-                      )}
+                      ) : null}
                     </td>
                     <td className="px-4 py-3"><CategoryChip category={t.category} /></td>
                     <td className="px-4 py-3"><TransactionTypeBadge type={t.transaction_type} /></td>
@@ -235,10 +242,18 @@ export function LedgerScreen({ transactions, selectedMonth, onEdit, onDelete, on
                 <button type="button" onClick={() => onEdit(t)} className="block w-full px-4 py-3.5 text-left">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="truncate font-body text-sm font-semibold text-neutral-900">{t.vendor_name}</p>
+                      <div className="flex items-center gap-1.5">
+                        <p className="truncate font-body text-sm font-semibold text-neutral-900">{t.vendor_name}</p>
+                        {t.attachment && (
+                          <Paperclip size={12} className="shrink-0 text-neutral-400" aria-label="Has receipt photo" />
+                        )}
+                      </div>
                       <p className="mt-0.5 font-body text-xs text-neutral-500">
                         {formatFullDate(t.date)} · {CATEGORY_META[t.category].label}
                       </p>
+                      {t.notes && (
+                        <p className="mt-0.5 truncate font-body text-xs text-neutral-400">{t.notes}</p>
+                      )}
                     </div>
                     <span className={`shrink-0 font-mono text-base font-semibold tabular-nums ${amountClass(t.transaction_type)}`}>
                       {formatPKR(t.transaction_type === 'income' ? t.total_amount : -t.total_amount, { signed: true })}

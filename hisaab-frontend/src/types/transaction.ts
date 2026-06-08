@@ -39,6 +39,7 @@ export interface Transaction {
   items: TransactionItem[];
   tax_amount: number | null;
   notes: string | null;
+  attachment: string | null;
 }
 
 // PRD §11.2 — Dashboard State (computed from transactions, never stored)
