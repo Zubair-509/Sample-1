@@ -1,15 +1,22 @@
-FROM node:20-alpine
+FROM node:20-slim
 
-WORKDIR /app
-
-COPY . .
-
-WORKDIR /app/hisaab-frontend
-RUN npm install && npm run build
-
+# ── Backend deps ────────────────────────────────────────────────────────────
 WORKDIR /app/backend
+COPY backend/package*.json ./
 RUN npm install
 
-EXPOSE 3000
+# ── Frontend deps + build ───────────────────────────────────────────────────
+WORKDIR /app/hisaab-frontend
+COPY hisaab-frontend/package*.json ./
+RUN npm install
 
+COPY hisaab-frontend/ ./
+RUN npm run build
+
+# ── Copy backend source ──────────────────────────────────────────────────────
+WORKDIR /app/backend
+COPY backend/ ./
+
+# ── Start ───────────────────────────────────────────────────────────────────
+EXPOSE 3000
 CMD ["node", "server.js"]
