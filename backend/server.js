@@ -95,7 +95,10 @@ async function initDb() {
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });
 
-app.use(cors({ origin: 'http://localhost:5000', credentials: true }));
+const allowedOrigins = process.env.REPLIT_DOMAINS
+  ? process.env.REPLIT_DOMAINS.split(',').map(d => `https://${d.trim()}`)
+  : ['http://localhost:5000'];
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 
 // ---------------------------------------------------------------------------
@@ -551,7 +554,7 @@ app.get('/api/config', (_req, res) => res.json({ aiEnabled: Boolean(process.env.
 
 initDb()
   .then(() => {
-    app.listen(PORT, 'localhost', () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`[Hisaab] Backend listening on http://localhost:${PORT}`);
     });
   })
