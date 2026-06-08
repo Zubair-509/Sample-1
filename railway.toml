@@ -1,11 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "cd hisaab-frontend && npm install && npm run build && cd ../backend && npm install"
 
 [deploy]
-startCommand = "node backend/server.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
-
-[variables]
-NODE_ENV = "production"
