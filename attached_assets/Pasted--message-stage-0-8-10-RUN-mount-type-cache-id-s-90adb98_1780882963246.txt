@@ -1,0 +1,91 @@
+{
+  "message": "[stage-0  8/10] RUN --mount=type=cache,id=s/90adb985-6421-40c9-9b29-d63ad23a502c-node_modules/cache,target=/app/node_modules/.cache cd hisaab-frontend && npm install && npm run build && cd ../backend && npm install",
+  "timestamp": "2026-06-08T01:41:05.676980016Z",
+  "severity": "error",
+  "children": [
+    {
+      "message": "npm warn config production Use `--omit=dev` instead.\n",
+      "timestamp": "2026-06-08T01:42:22.656351783Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: '@eslint/config-array@0.23.5',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.220321763Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: '@eslint/config-helpers@0.6.0',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.220338205Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: '@eslint/core@1.2.1',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.220697475Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: '@eslint/js@10.0.1',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.220935146Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: '@eslint/object-schema@3.0.5',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.221197072Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: '@eslint/plugin-kit@0.7.2',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.221313136Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: '@tailwindcss/oxide@4.3.0',\nnpm warn EBADENGINE   required: { node: '>= 20' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.221737658Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: '@vitejs/plugin-react@6.0.2',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.222199266Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: 'eslint@10.4.1',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.222816721Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: 'eslint-scope@9.1.2',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.222920259Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: 'eslint-visitor-keys@5.0.1',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.223021163Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: 'espree@11.2.0',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || ^22.13.0 || >=24' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.223025587Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: 'rolldown@1.0.3',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.223482269Z"
+    },
+    {
+      "message": "npm warn EBADENGINE Unsupported engine {\nnpm warn EBADENGINE   package: 'vite@8.0.16',\nnpm warn EBADENGINE   required: { node: '^20.19.0 || >=22.12.0' },\nnpm warn EBADENGINE   current: { node: 'v18.20.5', npm: '10.8.2' }\nnpm warn EBADENGINE }\n",
+      "timestamp": "2026-06-08T01:42:23.223746343Z"
+    },
+    {
+      "message": "\nadded 211 packages, and audited 212 packages in 4s\n\n46 packages are looking for funding\n  run `npm fund` for details\n",
+      "timestamp": "2026-06-08T01:42:26.138492823Z"
+    },
+    {
+      "message": "\nfound 0 vulnerabilities\n",
+      "timestamp": "2026-06-08T01:42:26.139422011Z"
+    },
+    {
+      "message": "npm warn config production Use `--omit=dev` instead.\n",
+      "timestamp": "2026-06-08T01:42:26.250281331Z"
+    },
+    {
+      "message": "\n> hisaab-frontend@0.0.0 build\n> tsc -b && vite build\n\n",
+      "timestamp": "2026-06-08T01:42:26.269396277Z"
+    },
+    {
+      "message": "\u001b[33mYou are using Node.js 18.20.5. Vite requires Node.js version 20.19+ or 22.12+. Please upgrade your Node.js version.\u001b[39m\n",
+      "timestamp": "2026-06-08T01:42:29.183872926Z"
+    },
+    {
+      "message": "file:///app/hisaab-frontend/node_modules/vite/dist/node/cli.js:533\n\t\t\t\tthis.dispatchEvent(new CustomEvent(`command:${commandName}`, { detail: command }));\n\t\t\t\t                       ^\n\nReferenceError: CustomEvent is not defined\n    at CAC.parse (file:///app/hisaab-frontend/node_modules/vite/dist/node/cli.js:533:28)\n    at file:///app/hisaab-frontend/node_modules/vite/dist/node/cli.js:834:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)\n\nNode.js v18.20.5\n",
+      "timestamp": "2026-06-08T01:42:29.187828828Z"
+    }
+  ]
+}

@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@google/genai": "^2.8.0",
     "drizzle-zod": "^0.8.3",
